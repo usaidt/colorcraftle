@@ -1,2 +1,3 @@
-# colorcraftle
-A color theory game for artists and amateurs
+# Color craftle
+
+My website to make a color theory game in react typescript
