@@ -7,18 +7,17 @@ interface TargetColorProps {
 
 const TargetColor: React.FC<TargetColorProps> = ({ color }) => {
   return (
-    <div style={{ textAlign: "center", marginBottom: "20px" }}>
-      <h2>Target Color</h2>
+    <div className="text-center mb-8">
+      <h2 className="text-2xl font-semibold mb-4">Target Color</h2>
       <div
+        className="w-48 h-48 mx-auto rounded-lg shadow-lg"
         style={{
-          width: "100px",
-          height: "100px",
           backgroundColor: rgbToCssString(color),
-          margin: "0 auto",
-          border: "1px solid #000",
         }}
       ></div>
-      <p>{`RGB(${color.r}, ${color.g}, ${color.b})`}</p>
+      <p className="mt-4 text-lg">
+        RGB({color.r}, {color.g}, {color.b})
+      </p>
     </div>
   );
 };
