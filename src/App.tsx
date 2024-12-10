@@ -74,20 +74,30 @@ const App: React.FC = () => {
     setTargetColor(generateRandomColor());
   };
 
-  const adjustColor = (color: 'r' | 'g' | 'b', amount: number) => {
+  const adjustColor = (color: 'r' | 'g' | 'b' | 'all', amount: number) => {
     if (gameOver) return;
-    setCurrentColor((prev) => ({
-      ...prev,
-      [color]: Math.max(0, Math.min(255, prev[color] + amount)),
-    }));
+  
+    if (color === "all") {
+      setCurrentColor((prev) => ({
+        r: Math.max(0, Math.min(255, prev.r + amount)),
+        g: Math.max(0, Math.min(255, prev.g + amount)),
+        b: Math.max(0, Math.min(255, prev.b + amount)),
+      }));
+    } else {
+      setCurrentColor((prev) => ({
+        ...prev,
+        [color]: Math.max(0, Math.min(255, prev[color] + amount)),
+      }));
+    }
+  
     setActions((prev) => prev + 1);
-
+  
     if (gameMode === 'standard' && actions + 1 >= settings.maxActions) {
       setGameOver(true);
     }
   };
 
-  const startAdjusting = (color: 'r' | 'g' | 'b', amount: number) => {
+  const startAdjusting = (color: 'r' | 'g' | 'b' | 'all', amount: number) => {
     if (intervalRef.current) return;
     intervalRef.current = setInterval(() => {
       adjustColor(color, amount);
@@ -109,7 +119,7 @@ const App: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-200 to-indigo-300 flex items-center justify-center p-6">
       <div className="bg-white rounded-3xl shadow-2xl p-10 w-full max-w-xl text-center">
         <h1 className="text-4xl font-extrabold text-purple-600 mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>
-          ColorCraft
+          ColorCraftle
         </h1>
 
         <div className="flex justify-center space-x-4 mb-8">
@@ -155,9 +165,9 @@ const App: React.FC = () => {
               className="w-28 h-28 rounded-lg shadow-lg mx-auto border-2 border-gray-300 flex items-center justify-center"
               style={{ backgroundColor: rgbToCssString(targetColor) }}
             >
-              <span className="text-sm text-gray-700 bg-white bg-opacity-75 px-2 py-1 rounded">
+              {/* <span className="text-sm text-gray-700 bg-white bg-opacity-75 px-2 py-1 rounded">
                 RGB({targetColor.r}, {targetColor.g}, {targetColor.b})
-              </span>
+              </span> */}
             </div>
           </div>
 
@@ -215,7 +225,7 @@ const App: React.FC = () => {
               <div className="flex justify-between mt-6">
                 <button
                   className="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition duration-300"
-                  onMouseDown={() => startAdjusting("r", -25)}
+                  onMouseDown={() => startAdjusting("all", -5)}
                   onMouseUp={stopAdjusting}
                   onMouseLeave={stopAdjusting}
                 >
@@ -223,7 +233,7 @@ const App: React.FC = () => {
                 </button>
                 <button
                   className="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition duration-300"
-                  onMouseDown={() => startAdjusting("r", 25)}
+                  onMouseDown={() => startAdjusting("all", 5)}
                   onMouseUp={stopAdjusting}
                   onMouseLeave={stopAdjusting}
                 >
