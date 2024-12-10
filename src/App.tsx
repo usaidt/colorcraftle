@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import TargetColor from "./components/TargetColor";
+import Mixer from "./components/Mixer";
+import { generateRandomColor } from "./utils/colorUtils";
 
-function App() {
+const App: React.FC = () => {
+  const targetColor = generateRandomColor();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>ColorCraftle</h1>
+      <TargetColor color={targetColor} />
+      <Mixer targetColor={targetColor} />
     </div>
   );
-}
+};
 
 export default App;
