@@ -117,7 +117,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-200 to-indigo-300 flex items-center justify-center p-6">
-      <div className="bg-white rounded-3xl shadow-2xl p-10 w-full max-w-xl text-center">
+      <div className="bg-white rounded-3xl shadow-2xl p-10 w-full max-w-2xl text-center">
         <h1 className="text-4xl font-extrabold text-purple-600 mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>
           ColorCraftle
         </h1>
